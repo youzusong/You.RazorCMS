@@ -5,6 +5,8 @@ namespace You.RazorCMS.Middlewares
 {
     public class AdminAreaMiddleware : IMiddleware
     {
+        private const string DEFAULT_AREA_NAME = "admin";
+
         private readonly SecurityOptions _securityOpts;
 
         public AdminAreaMiddleware(IOptions<SecurityOptions> securityOpts)
@@ -12,10 +14,31 @@ namespace You.RazorCMS.Middlewares
             _securityOpts = securityOpts.Value;
         }
 
-        public Task InvokeAsync(HttpContext context, RequestDelegate next)
+        public async Task InvokeAsync(HttpContext context, RequestDelegate next)
         {
+            string? path = context.Request.Path.Value?.ToLower();
+            if (!String.IsNullOrEmpty(path))
+            {
+                if (path.StartsWith("/" + DEFAULT_AREA_NAME))
+                {
+                    context.Response.StatusCode = 404;
+                    await context.Response.WriteAsync("PAGE NOT FOUND");
+                    return;
+                }
 
-            return next(context);
+                string adminAreaName = _securityOpts.AdminAreaName.ToLower();
+
+                if (path == "/" + adminAreaName)
+                    path += "/";
+
+                if (path.StartsWith("/" + adminAreaName + "/"))
+                {
+                    string pageName = path.Substring(adminAreaName.Length + 1);
+                    context.Request.Path = "/" + DEFAULT_AREA_NAME + pageName;
+                }
+            }
+
+            await next(context);
         }
     }
 }

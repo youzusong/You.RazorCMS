@@ -11,7 +11,7 @@ namespace You.RazorCMS.Mvc.ApplicationModels
                 if (selector?.AttributeRouteModel?.Template is null)
                     continue;
 
-                selector.AttributeRouteModel.Template.Replace("admin/", "manage/");
+                selector.AttributeRouteModel.Template = selector.AttributeRouteModel.Template.Replace("Admin/", "Manage/");
             }
         }
     }
