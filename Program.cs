@@ -1,22 +1,23 @@
-using Microsoft.Extensions.DependencyInjection;
 using You.RazorCMS.Middlewares;
 using You.RazorCMS.Mvc.ApplicationModels;
 using You.RazorCMS.Services.Settings;
 
 var builder = WebApplication.CreateBuilder(args);
 
+var securityOpts = builder.Configuration.GetSection("Security");
+
 // Add services to the container.
 builder.Services
     .AddRazorPages(opts =>
     {
-        opts.Conventions.Add(new AdminAreaPageRouteModelConvention());
+        opts.Conventions.Add(new AdminAreaPageRouteModelConvention(securityOpts["AdminAreaName"]));
     })
     .AddRazorRuntimeCompilation();
 
-builder.Services.Configure<SecurityOptions>(builder.Configuration.GetSection("Security"));
+builder.Services.Configure<SecurityOptions>(securityOpts);
 
 // Middlewares
-builder.Services.AddScoped<AdminAreaMiddleware>();
+builder.Services.AddScoped<AdminAreaSecurityMiddleware>();
 
 
 
@@ -34,7 +35,7 @@ if (!app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 app.UseStaticFiles();
 
-app.UseMiddleware<AdminAreaMiddleware>();
+app.UseMiddleware<AdminAreaSecurityMiddleware>();
 
 
 app.UseRouting();

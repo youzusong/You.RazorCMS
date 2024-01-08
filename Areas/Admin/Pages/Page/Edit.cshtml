@@ -1,0 +1,122 @@
+﻿@page
+@model You.RazorCMS.Areas.Admin.Pages.Page.EditModel
+@{
+}
+
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/admin.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/admin_page_edit.css" asp-append-version="true" />
+</head>
+<body>
+    <div class="d-flex flex-row" style="height:100vh; min-width:1760px;">
+        <div style="width:240px; background-color:#f5f5f5; border-right:10px solid #ddd; box-sizing:border-box;">
+            <h1>左侧</h1>
+        </div>
+        <div style="min-width:1200px; flex:1;">
+            <div id="pg_main_header" style="height:64px; background-color:#333;"></div>
+            <div id="pg_main_body" style="height:calc(100vh - 64px); overflow-y:scroll; overflow-x:auto;">
+                <div class="temp_module">
+                    <div class="temp_module_layer">
+                        <div class="temp_module_layer_action">
+                            <button type="button" class="btn btn-danger">删除</button>
+                            <button type="button" class="btn btn-primary">编辑</button>
+                        </div>
+                    </div>
+                    <div class="temp_module_content">
+                        <div class="module_desc_1">
+                            <h1>标题1111111</h1>
+                            <h2>副标题22222222222</h2>
+                            <div>描述33333333333333333</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="temp_module">
+                    <div class="temp_module_layer">
+                        <div class="temp_module_layer_action">
+                            <button type="button" class="btn btn-danger">删除</button>
+                            <button type="button" class="btn btn-primary">编辑</button>
+                        </div>
+                    </div>
+                    <div class="temp_module_content">
+                        <div class="module_desc_2">
+                            <ul>
+                                <li>11111111</li>
+                                <li>22222</li>
+                                <li>333</li>
+                                <li>44</li>
+                                <li>5555</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="temp_module">
+                    <div class="temp_module_layer">
+                        <div class="temp_module_layer_action">
+                            <button type="button" class="btn btn-danger">删除</button>
+                            <button type="button" class="btn btn-primary">编辑</button>
+                        </div>
+                    </div>
+                    <div class="temp_module_content">
+                        <div class="module_PicWithText_1">
+                            <div class="PicWithText_lt" style="background:url('/media/e81ee1ac1b99895d18bed25432337e592f746236.jpg');"></div>
+                            <div class="PicWithText_rt">
+                                <h1>标题1111111</h1>
+                                <h2>副标题2222222</h2>
+                                <h3>描述333333333</h3>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="temp_module">
+                    <div class="temp_module_layer">
+                        <div class="temp_module_layer_action">
+                            <button type="button" class="btn btn-danger">删除</button>
+                            <button type="button" class="btn btn-primary">编辑</button>
+                        </div>
+                    </div>
+                    <div class="temp_module_content">
+                        <div class="module_PicWithText_2">
+                            <div class="PicWithText_lt">
+                                <h1>标题1111111</h1>
+                                <h2>副标题2222222</h2>
+                                <h3>描述333333333</h3>
+                            </div>
+                            <div class="PicWithText_rt" style="background:url('/media/e81ee1ac1b99895d18bed25432337e592f746236.jpg');"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div style="width:320px; background-color:#fff;">
+            <h1>右侧</h1>
+        </div>
+    </div>
+    
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        (function () { 
+            var $main = $('#pg_main_body');
+            var modules = [];
+        
+            modules.push({
+                "type": 'PicWithText',
+                "style": "1",
+                "data": {
+                    "img": "",
+                    "title": "标题11111111",
+                    "sub_title": "副标题2222222",
+                    "desc": "描述333333333"
+                }
+            });
+
+
+        })();
+    </script>
+</body>
+</html>
