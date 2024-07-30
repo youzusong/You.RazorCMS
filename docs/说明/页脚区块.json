@@ -1,0 +1,87 @@
+{
+	"type": "PageFooter"	// 区块类型
+	"name": "页脚",	// 区块名称
+	"mode": "A",	// 区块版式
+	"comps": {
+		"contact_type": {
+			"label": "联系方式类型",
+			"type": "Select",
+			"options": [
+				{ "label": "文字", "value": "Text" },
+				{ "label": "二维码", "value": "QrCode" }
+			],
+			"value": "Text"
+		}
+	},
+	
+	"components": [		// 区块组件
+		{
+			"label": "联系方式类型",
+			"name": "contact_type",
+			"type": "Select",
+			"options": [
+				{ "label": "文字", "value": "Text" },
+				{ "label": "二维码", "value": "QrCode" }
+			],
+			"value": "Text"
+		},
+		{
+			"label": "联系我们",
+			"name": "contact_us",
+			"type": "Text",
+			"value": "联系我们"
+		},
+		{
+			"label": "二维码",
+			"name": "qrcode",
+			"type": "Image",
+			"value": "",
+			"show_condition":  {"name": "contact_type", "value": "Text"}
+		},
+		{
+			"label": "地址",
+			"name": "address",
+			"type": "Text",
+			"show_switch": true,
+			"value": "福建省泉州晋江市安海镇",
+			"show_condition":  {"name": "contact_type", "value": "QrCode"}
+		},
+		{
+			"label": "版权信息",
+			"name": "copyright",
+			"type": "Text",
+			"show_switch": true,
+			"value": "copyright © 2013 - 2023 Handcome. All Rights Reserved. 城盛科技版权所有"
+		},
+		{
+			"label": "备案号",
+			"name": "record_no",
+			"type": "RecordNo",
+			"show_switch": true,
+			"value": {
+				"title": "京公网安备 11010802020287",
+				"link": {
+					"url_type": 2,
+					"url_value": "http://www.baidu.com",
+					"open_type": 1
+				}
+			}
+		},
+		{
+			"label": "页脚菜单",
+			"name": "menus",
+			"type": "Menus",
+			"value": [
+				{ 	"title": "产品展示",  
+					"link": { "url_type": 0  }, 
+					"items": [
+						{ "title": "产品1111", "link": { "url_type": 1, "url_value": "222", "open_type": 0  } },
+						{ "title": "产品222", "link": { "url_type": 2, "url_value": "http://www.baidu.com", "open_type": 1  } }
+					]  
+				},
+				{ "title": "新闻中心",  "link": { "url_type": 0  }, "items": [ ]  },
+				{ "title": "客户案例",  "link": { "url_type": 0  }, "items": [ ]  },
+			]
+		}
+	]
+}

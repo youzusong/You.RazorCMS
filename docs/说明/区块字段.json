@@ -1,0 +1,54 @@
+{
+	"name": "John",
+	"age": 25,
+	"sections": [
+		{
+			"Type": "TuWenJieShao",
+			"Style": "A",
+			"Data":  {
+				"title": "測試標題",
+				"desc": "描述.沙發上是非得失的發是發送到發水電費水電費,
+				"cols": 3,
+				"margin": 20,
+				"items": [
+					{ 
+						"title": "產品111", 
+						"desc": "神鼎飛丹砂",  
+						"button": { 
+							"text": "點我", 
+							"link" :  {
+								"url_type": 0,
+								"url_value": "",
+								"open_type": 0
+							} 
+						} 
+					}
+				]
+			}
+		}
+	]
+}
+
+[
+   {
+   	"label": "标题"
+   	"type": "text",
+   	"show_toggle": false
+   },
+    {
+   	"label": "描述"
+   	"type": "richtext",
+   	"show_toggle": true
+   },
+   {
+   	"label": "页脚菜单",
+   	"type": "menu",
+   	"show_toggle": false
+   },
+   {
+   	"label": "版权信息",
+   	"type": "text",
+   	"show_toggle": false
+   }
+]
+
