@@ -1,0 +1,159 @@
+﻿@page
+@model You.RazorCMS.Pages.NewPageModel
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - You.RazorCMS</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/You.RazorCMS.styles.css" asp-append-version="true" />
+    <link href="~/css/template.css" rel="stylesheet" asp-append-version="true" />
+    <style type="text/css">
+        body{
+            padding:0;
+            margin:0;
+        }
+        #page_wrapper{
+            display:flex;
+            height:100vh;
+        }    
+
+        #page_left{
+            background-color:#f5f5f5;
+            width:280px;
+            overflow-y:scroll;
+        }
+
+        #page_mid{
+            flex:1;
+            overflow:scroll;
+        }
+
+        #page_mid_body{
+            min-width:1024px;
+        }
+
+        #page_right{
+            background-color:#f5f5f5;
+            width: 280px;
+            overflow-y: scroll;
+        }
+
+        #page_right_modules{
+            display:block;
+        }
+
+        #page_right_styles{
+            display:none;
+        }
+
+        #page_right_style_grp {
+            display:none;
+        }
+
+        .page_right_style_item{
+            background-color:#fff;
+            padding:10px;
+            border:1px solid #ddd;
+            margin-bottom:10px;
+        }
+
+        .page_right_style_item--active{
+            border-color:#ff6600;
+            color:#ff6600;
+        }
+
+        .hc_module{}
+
+        .hc_module--fixedwidth{
+            width:1024px;
+            margin: 0 auto;
+        }
+
+        .hc_module-A-1{
+            background-color:#ff6600;
+            color:#fff;
+        }
+
+    </style>
+</head>
+<body>
+    
+    <div id="page_wrapper">
+        <div id="page_left">
+
+        </div>
+        <div id="page_mid">
+            <div id="page_mid_body">
+                <div id="page_mid_body_header"></div>
+                <div id="page_mid_body_main">
+                    <div class="container text-center">
+                        <div class="row g-0">
+                            <div class="col">
+                                <div style="background-color:#ff5500;">Column</div>
+                            </div>
+                            <div class="col">
+                                <div style="background-color:#f6f600;">Column</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div id="page_mid_body_footer"></div>
+            </div>
+        </div>
+        <div id="page_right">
+            <div id="page_right_modules">
+                <div class="page_right_module_item" data-name="A">模組A</div>
+                <div class="page_right_module_item" data-name="B">模組B</div>
+                <div class="page_right_module_item" data-name="C">模組C</div>
+            </div>
+            <div id="page_right_styles">
+                <div id="page_right_styles_header">
+                    <button type="button" id="btn_backto_modules">返回</button>
+                </div>
+                <div id="page_right_styles_main">
+                    <div class="page_right_style_grp" data-name="A">
+                        <div class="page_right_style_item" data-name="A1">模組A - 版型111</div>
+                        <div class="page_right_style_item" data-name="A2">模組A - 版型222</div>
+                        <div class="page_right_style_item" data-name="A3">模組A - 版型333</div>
+                    </div>
+                    <div class="page_right_style_grp" data-name="B">
+                        <div class="page_right_style_item" data-name="B1">模組B - 版型111</div>
+                        <div class="page_right_style_item" data-name="B2">模組B - 版型222</div>
+                    </div>
+                    <div class="page_right_style_grp" data-name="C">
+                        <div class="page_right_style_item" data-name="C1">模組C - 版型111</div>
+                    </div>
+                </div>
+                <div id="page_right_styles_footer">
+                    <button type="button" id="btn_add_style">添加</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    <script src="~/js/template.js" asp-append-version="true"></script>
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
