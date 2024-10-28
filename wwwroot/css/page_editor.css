@@ -1,0 +1,36 @@
+﻿body{
+    padding:0;
+    margin:0;
+}
+
+html{
+    padding:0;
+    margin:0;
+}
+
+#u_page {
+    display:flex;
+    height:100vh;
+}
+
+#u_page_lt {
+    width: 280px;
+    background-color: #f5f5f5;
+    overflow-y:scroll;
+}
+
+#u_page_md {
+    flex: 1;
+    background-color: #fff;
+    overflow-y: scroll;
+}
+
+#u_page_md_wrap{
+    min-width:1000px;
+}
+
+#u_page_rt {
+    width: 280px;
+    background-color: #f5f5f5;
+    overflow-y: scroll;
+}

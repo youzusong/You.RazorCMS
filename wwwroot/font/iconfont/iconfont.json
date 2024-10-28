@@ -1,0 +1,30 @@
+{
+  "id": "4726350",
+  "name": "eEIP",
+  "font_family": "iconfont",
+  "css_prefix_text": "icon-",
+  "description": "",
+  "glyphs": [
+    {
+      "icon_id": "229451",
+      "name": "pc",
+      "font_class": "pc",
+      "unicode": "e613",
+      "unicode_decimal": 58899
+    },
+    {
+      "icon_id": "251250",
+      "name": "mobile",
+      "font_class": "mobile",
+      "unicode": "e6a0",
+      "unicode_decimal": 59040
+    },
+    {
+      "icon_id": "1567547",
+      "name": "ipad",
+      "font_class": "ipad",
+      "unicode": "e664",
+      "unicode_decimal": 58980
+    }
+  ]
+}

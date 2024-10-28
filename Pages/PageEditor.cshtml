@@ -1,0 +1,41 @@
+﻿@page
+@model You.RazorCMS.Pages.PageEditorModel
+@{
+    Layout = null;
+}
+
+
+<!DOCTYPE html>
+<html lang="zh-tw">
+<head>
+    <title>自定頁面編輯</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/page_editor.css" asp-append-version="true" />
+    <script src="~/lib/tinymce/tinymce.min.js"></script>
+</head>
+<body>
+    <div id="u_page">
+        <div id="u_page_lt">
+            111
+        </div>
+        <div id="u_page_md">
+            <div id="u_page_md_wrap">
+                <div id="u_page_md_header"></div>
+                <div id="u_page_md_main">
+
+                </div>
+                <div id="u_page_md_footer"></div>
+            </div>
+        </div>
+        <div id="u_page_rt">
+            333
+        </div>
+    </div>
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/page_editor.js" asp-append-version="true"></script>
+</body>
+</html>
