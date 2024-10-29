@@ -3,7 +3,10 @@
     var modules = {
 
         'Carousel': {
-            styles: ['A'],
+            name: '輪播圖',
+            styles: [
+                { value: 'A', label: '一般輪播' },
+            ],
             defaultData: {
                 interval: 2000,
                 items: [
@@ -37,9 +40,74 @@
 
                 return html;
             }
+        },
+
+        'PicWithTxt': {
+            name: '簡易圖文',
+            styles: [
+                { value: 'A1', label: '左圖右文' },
+                { value: 'B1', label: '左文右圖' }
+            ],
+            defaultData: {
+                src: '/wwwroot/media/editor/modules/PicWithTxt/pic.jpg',
+                title: '標題',
+                desc: '內容',
+                btn: {
+                    txt: '查看詳情',
+                    link: 'http://www.handcome.com.tw'
+                }
+            }
         }
 
     }
+
+    var tmpModuleId = 100;
+    var $viewModules = $('#u_page_view_modules');
+    var $viewStyles = $('#u_page_view_styles');
+
+    function initEditor() {
+        initView();
+    }
+
+    function initView() {
+        var modulesHtml = '';
+        var stylesHtml = '';
+
+        $.each(Object.keys(modules), function (index, key) {
+            modulesHtml += '<div class="u_module_item" data-key="' + key + '">' + modules[key].name + '</div>';
+            stylesHtml += '<div class="u_module_grp" data-key="' + key + '">';
+            $.each(modules[key].styles, function (sIndex, sItem) {
+                stylesHtml += '<div class="u_style_item" data-value="' + sItem.value + '">' + sItem.label + '</div>';
+            });
+            stylesHtml += '</div>';
+        });
+
+        $viewModules.find('.u_pnl_main').html(modulesHtml);
+        $viewStyles.find('.u_pnl_main').html(stylesHtml);
+
+        // 選中模組
+        $viewModules.on('click', '.u_module_item', function () {
+            var key = $(this).data('key');
+            var $curr = $viewStyles.find('.u_module_grp[data-key=' + key + ']');
+
+
+            $curr.show();
+            $curr.siblings().hide();
+
+            $viewModules.hide();
+            $viewStyles.show();
+        });
+
+        // 選中版型
+
+
+    }
+
+
+    initEditor();
+    return;
+
+
 
 
     var $pageMain = $('#page_mid_body_main');
