@@ -18,34 +18,61 @@
 <body>
     <div id="u_page">
         <div id="u_page_lt">
-            111
+            <div id="u_page_lt_wrap"></div>
         </div>
         <div id="u_page_md">
-            <div id="u_page_md_wrap">
-                <div id="u_page_md_header"></div>
-                <div id="u_page_md_main">
-
+            <div id="u_page_md_header">
+                <span>電腦</span>
+                <span>平板</span>
+                <span>手機</span>
+            </div>
+            <div id="u_page_md_main">
+                <div id="u_page_md_main_monitor">
+                    <div class="u_monitor_screen u_monitor-pc_screen">
+                        <div id="u_page_md_wrap">
+                            <div id="u_page_html_header">
+                                <h1 class="text-center bg-success">Page Header</h1>
+                            </div>
+                            <div id="u_page_html_main">
+                            </div>
+                            <div id="u_page_html_footer">
+                                <h1 class="text-center bg-warning">Page Footer</h1>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="u_monitor-pc_stand"></div>
+                    <div class="u_monitor-pc_base"></div>
                 </div>
-                <div id="u_page_md_footer"></div>
             </div>
         </div>
         <div id="u_page_rt">
-            <div id="u_page_view_modules">
-                <div class="u_pnl_header">選擇模組</div>
-                <div class="u_pnl_main"></div>
-            </div>
-            <div id="u_page_view_styles" style="display:none;">
-                <div class="u_pnl_header">選擇版型</div>
-                <div class="u_pnl_main">
-
+            <div id="u_page_rt_wrap">
+                <div id="u_page_view_modules">
+                    <div class="u_pnl_header">可選模組</div>
+                    <div class="u_pnl_main"></div>
+                </div>
+                <div id="u_page_view_styles" style="display:none;">
+                    <div class="u_pnl_header">
+                        <span>可選版型</span>
+                        <button class="btn btn-danger btn-sm u_btn_backtomodules">返回</button>
+                    </div>
+                    <div class="u_pnl_main">
+                    </div>
+                </div>
+                <div id="u_page_view_form" style="display:none;">
                 </div>
             </div>
-            <div id="u_page_view_editor" style="display:none;"></div>
         </div>
     </div>
 
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/lib/sortable/sortable.min.js"></script>
     <script src="~/js/page_editor.js" asp-append-version="true"></script>
+    <script>
+        Sortable.create(document.getElementById('u_page_html_main'),{
+            
+        });
+    </script>
 </body>
 </html>
