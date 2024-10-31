@@ -6,21 +6,39 @@
             label: '輪播圖',
             styles: [
                 { value: 'A', label: '一般輪播' },
+                { value: 'B', label: '大圖輪播' }
             ],
 
             defaultData: {
                 interval: 2000,
+                width: 'static',
                 items: [
-                    { title: '标题111', image: '/image/demo/carousel_1.jpg' },
-                    { title: '标题222', image: '/image/demo/carousel_2.jpg' },
-                    { title: '标题333', image: '/image/demo/carousel_3.jpg' }
+                    { title: '標題111', image: '/image/demo/carousel_1.jpg' },
+                    { title: '標題222', image: '/image/demo/carousel_2.jpg' },
+                    { title: '標題333', image: '/image/demo/carousel_3.jpg' }
                 ]
+            },
+
+            defData: {
+                container: {
+                    marginBottom: 0,
+                    borderRadius: [0, 0, 0, 0]
+                },
+                form: {
+                    interval: 2000,
+                    width: 'static',
+                    items: [
+                        { title: '標題111', image: '/image/demo/carousel_1.jpg' },
+                        { title: '標題222', image: '/image/demo/carousel_2.jpg' },
+                        { title: '標題333', image: '/image/demo/carousel_3.jpg' }
+                    ]
+                }
             },
 
             renderHtml(id, style, data) {
                 var entityId = 'u_module_entity-' + id;
-                var html = '<div id="' + entityId + '" class="carousel carousel-dark slide" data-bs-ride="carousel">';
-
+                var html = '<div id="' + entityId + '" class="' + (data.width == 'fluid' ? 'container-fluid' : 'container') + ' g-0">';
+                html += '<div class="carousel carousel-dark slide" data-bs-ride="carousel">';
                 html += '<div class="carousel-inner">';
                 $.each(data.items, function (index, item) {
                     html += '<div class="carousel-item' + (index == 0 ? ' active' : '') + '" data-bs-interval="' + data.interval + '">\
@@ -41,17 +59,27 @@
                          </button >';
 
                 html += '</div>';
+                html += '</div>';
 
                 return html;
             },
 
-            renderForm() {
+            renderViewHtml() {
+                var html = '';
 
+
+                return html;
+            },
+
+            renderFormHtml() {
+                var html = '';
+
+                return html;
             }
         },
 
         'PicWithTxt': {
-            label: '簡易圖文',
+            label: '圖文並列',
             styles: [
                 { value: 'A1', label: '左圖右文' },
                 { value: 'B1', label: '左文右圖' }

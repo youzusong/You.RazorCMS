@@ -55,10 +55,11 @@ html{
 
     #u_page_md_main_monitor .u_monitor-pc_screen {
         flex: 1;
-        width: 100%;
+        width: calc(100vw - 600px);
         min-width: 1200px;
         border: 10px solid #ddd;
         border-radius: 5px;
+        box-sizing: border-box;
         overflow-y: scroll;
     }
 

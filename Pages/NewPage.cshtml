@@ -11,138 +11,99 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - You.RazorCMS</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
-    <link rel="stylesheet" href="~/You.RazorCMS.styles.css" asp-append-version="true" />
-    <link href="~/css/template.css" rel="stylesheet" asp-append-version="true" />
+    <link href="~/css/module.css" rel="stylesheet" />
     <style type="text/css">
         body{
             padding:0;
             margin:0;
-        }
-        #page_wrapper{
-            display:flex;
-            height:100vh;
-        }    
-
-        #page_left{
-            background-color:#f5f5f5;
-            width:280px;
-            overflow-y:scroll;
+            background-color: #fff;
         }
 
-        #page_mid{
-            flex:1;
-            overflow:scroll;
-        }
-
-        #page_mid_body{
-            min-width:1024px;
-        }
-
-        #page_right{
-            background-color:#f5f5f5;
-            width: 280px;
-            overflow-y: scroll;
-        }
-
-        #page_right_modules{
+        img{
+            width: 100%;
             display:block;
         }
-
-        #page_right_styles{
-            display:none;
-        }
-
-        #page_right_style_grp {
-            display:none;
-        }
-
-        .page_right_style_item{
-            background-color:#fff;
-            padding:10px;
-            border:1px solid #ddd;
-            margin-bottom:10px;
-        }
-
-        .page_right_style_item--active{
-            border-color:#ff6600;
-            color:#ff6600;
-        }
-
-        .hc_module{}
-
-        .hc_module--fixedwidth{
-            width:1024px;
-            margin: 0 auto;
-        }
-
-        .hc_module-A-1{
-            background-color:#ff6600;
-            color:#fff;
-        }
-
+       
     </style>
 </head>
 <body>
-    
-    <div id="page_wrapper">
-        <div id="page_left">
 
+    <div style="margin:0 auto;">
+
+        <div class="u_module u_module-Carousel u_module-Carousel-A">
+            <div class="container">
+                <div id="u_module_entity-101" class="carousel slide" data-bs-ride="carousel">
+                    <div class="carousel-inner">
+                        <div class="carousel-item active" data-bs-interval="2000">
+                            <img src="/image/demo/carousel_1.jpg" alt="標題111" title="標題111" />
+                        </div>
+                        <div class="carousel-item" data-bs-interval="2000">
+                            <img src="/image/demo/carousel_2.jpg" alt="標題222" title="標題222" />
+                        </div>
+                        <div class="carousel-item" data-bs-interval="2000">
+                            <img src="/image/demo/carousel_3.jpg" alt="標題333" title="標題333" />
+                        </div>
+                    </div>
+                    <button class="carousel-control-prev" type="button" data-bs-target="#u_module_entity-101" data-bs-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Previous</span>
+                    </button>
+                    <button class="carousel-control-next" type="button" data-bs-target="#u_module_entity-101" data-bs-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Next</span>
+                    </button>
+                </div>
+            </div>
         </div>
-        <div id="page_mid">
-            <div id="page_mid_body">
-                <div id="page_mid_body_header"></div>
-                <div id="page_mid_body_main">
-                    <div class="container text-center">
-                        <div class="row g-0">
-                            <div class="col">
-                                <div style="background-color:#ff5500;">Column</div>
-                            </div>
-                            <div class="col">
-                                <div style="background-color:#f6f600;">Column</div>
-                            </div>
+
+        <div class="u_module u_module-PicWithTxt u_module-PicWithTxt-A1">
+            <div class="container">
+                <div class="row g-0 rounded-3">
+                    <div class="col-12 col-lg-6">
+                        <div class="u_module-PicWithTxt_pic">
+                            <img class="u_module-PicWithTxt_pic_img" src="~/image/demo/picwithtxt_1.jpg" />
+                        </div>
+                    </div>
+                    <div class="col-12 col-lg-6">
+                        <div class="u_module-PicWithTxt_txt">
+                            <div class="u_module-PicWithTxt_txt_title fs-3 mb-3">勝多負少防守打法設定</div>
+                            <div class="u_module-PicWithTxt_txt_desc fs-5 mb-2">收到發撒的防守打法士大夫士大夫水岸東方水岸東方阿薩德防守打法士大夫</div>
+                            <div class="u_module-PicWithTxt_txt_act text-end"><a href="/" class="btn btn-primary">查看詳情</a></div>
                         </div>
                     </div>
                 </div>
-                <div id="page_mid_body_footer"></div>
             </div>
         </div>
-        <div id="page_right">
-            <div id="page_right_modules">
-                <div class="page_right_module_item" data-name="A">模組A</div>
-                <div class="page_right_module_item" data-name="B">模組B</div>
-                <div class="page_right_module_item" data-name="C">模組C</div>
-            </div>
-            <div id="page_right_styles">
-                <div id="page_right_styles_header">
-                    <button type="button" id="btn_backto_modules">返回</button>
-                </div>
-                <div id="page_right_styles_main">
-                    <div class="page_right_style_grp" data-name="A">
-                        <div class="page_right_style_item" data-name="A1">模組A - 版型111</div>
-                        <div class="page_right_style_item" data-name="A2">模組A - 版型222</div>
-                        <div class="page_right_style_item" data-name="A3">模組A - 版型333</div>
+        <div class="u_module u_module-PicWithTxt u_module-PicWithTxt-A2">
+            <div class="container">
+                <div class="row g-0 rounded-3">
+                    <div class="col-12 col-lg-6 u_module-PicWithTxt_txt--source">
+                        <div class="u_module-PicWithTxt_txt">
+                            <div class="u_module-PicWithTxt_txt_title fs-3 mb-3">勝多負少防守打法設定</div>
+                            <div class="u_module-PicWithTxt_txt_desc fs-5 mb-2">收到發撒的防守打法士大夫士大夫水岸東方水岸東方阿薩德防守打法士大夫</div>
+                            <div class="u_module-PicWithTxt_txt_act text-start"><a href="/" class="btn btn-primary">查看詳情</a></div>
+                        </div>
                     </div>
-                    <div class="page_right_style_grp" data-name="B">
-                        <div class="page_right_style_item" data-name="B1">模組B - 版型111</div>
-                        <div class="page_right_style_item" data-name="B2">模組B - 版型222</div>
+                    <div class="col-12 col-lg-6">
+                        <div class="u_module-PicWithTxt_pic">
+                            <img class="u_module-PicWithTxt_pic_img" src="~/image/demo/picwithtxt_1.jpg" />
+                        </div>
                     </div>
-                    <div class="page_right_style_grp" data-name="C">
-                        <div class="page_right_style_item" data-name="C1">模組C - 版型111</div>
+                    <div class="col-12 col-lg-6 u_module-PicWithTxt_txt--clone">
+                        <div class="u_module-PicWithTxt_txt">
+                            <div class="u_module-PicWithTxt_txt_title fs-3 mb-3">勝多負少防守打法設定</div>
+                            <div class="u_module-PicWithTxt_txt_desc fs-5 mb-2">收到發撒的防守打法士大夫士大夫水岸東方水岸東方阿薩德防守打法士大夫</div>
+                            <div class="u_module-PicWithTxt_txt_act text-end"><a href="/" class="btn btn-primary">查看詳情</a></div>
+                        </div>
                     </div>
-                </div>
-                <div id="page_right_styles_footer">
-                    <button type="button" id="btn_add_style">添加</button>
                 </div>
             </div>
         </div>
-    </div>
 
+    </div>
+    
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="~/js/site.js" asp-append-version="true"></script>
-    <script src="~/js/template.js" asp-append-version="true"></script>
-
 </body>
 </html>
 
