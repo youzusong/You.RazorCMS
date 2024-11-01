@@ -11,7 +11,6 @@
         overflow: hidden;
     }
 
-
 /***** 輪播圖 BEGIN *****/
 .u_module-Carousel {
 }
@@ -43,6 +42,7 @@
     overflow: hidden;
 }
 
+
 .u_module-PicWithTxt_pic_img {
     height: 100%;
 }
@@ -50,8 +50,6 @@
 .u_module-PicWithTxt_txt {
     display: flex;
     flex-direction: column;
-    background-color: #f5f5f5;
-    color: #333;
     padding: 1rem;
 }
 
@@ -60,13 +58,22 @@
     overflow: hidden;
 }
 
+
 @media(max-width: 992px) {
-    .u_module-PicWithTxt-A2 .u_module-PicWithTxt_txt--source {
+    .u_module-PicWithTxt_txt--source {
         display: none;
     }
 
-    .u_module-PicWithTxt-A2 .u_module-PicWithTxt_txt--clone {
+    .u_module-PicWithTxt_txt--clone {
         display: block;
+    }
+
+    .u_module-PicWithTxt-B1 .u_module-PicWithTxt_pic {
+        padding: 1rem 1rem 0 1rem;
+    }
+
+    .u_module-PicWithTxt-B2 .u_module-PicWithTxt_pic {
+        padding: 1rem 1rem 0 1rem;
     }
 }
 
@@ -76,12 +83,20 @@
         height: 234px;
     }
 
-    .u_module-PicWithTxt-A2 .u_module-PicWithTxt_txt--source {
+    .u_module-PicWithTxt_txt--source {
         display: block;
     }
 
-    .u_module-PicWithTxt-A2 .u_module-PicWithTxt_txt--clone {
+    .u_module-PicWithTxt_txt--clone {
         display: none;
+    }
+
+    .u_module-PicWithTxt-B1 .u_module-PicWithTxt_pic {
+        padding: 1rem 0 1rem 1rem;
+    }
+
+    .u_module-PicWithTxt-B2 .u_module-PicWithTxt_pic {
+        padding: 1rem 1rem 1rem 0;
     }
 }
 

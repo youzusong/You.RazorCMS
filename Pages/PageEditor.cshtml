@@ -20,7 +20,18 @@
 <body>
     <div id="u_page">
         <div id="u_page_lt">
-            <div id="u_page_lt_wrap"></div>
+            <div id="u_page_lt_wrap">
+                <div id="u_pnl_pagelist">
+                    <div class="u_pnl_header"></div>
+                    <div class="u_pnl_body"></div>
+                    <div class="u_pnl_footer"></div>
+                </div>
+                <div id="u_pnl_pageform">
+                    <div class="u_pnl_header"></div>
+                    <div class="u_pnl_body"></div>
+                    <div class="u_pnl_footer"></div>
+                </div>
+            </div>
         </div>
         <div id="u_page_md">
             <div id="u_page_md_header">
@@ -29,40 +40,14 @@
                 <span>手機</span>
             </div>
             <div id="u_page_md_main">
-                <div id="u_page_md_main_monitor">
+                <div id="u_pnl_monitor">
                     <div class="u_monitor_screen u_monitor-pc_screen">
-                        <div id="u_page_md_wrap">
-                            <div id="u_page_html_header">
+                        <div id="u_pnl_view">
+                            <div id="u_pnl_view_header">
                                 <h1 class="text-center bg-success">Page Header</h1>
                             </div>
-                            <div id="u_page_html_main">
-                                <div class="u_module u_module-Carousel u_module-Carousel-A">
-                                    <div class="container">
-                                        <div id="u_module_entity-101" class="carousel slide" data-bs-ride="carousel">
-                                            <div class="carousel-inner">
-                                                <div class="carousel-item active" data-bs-interval="2000">
-                                                    <img src="/image/demo/carousel_1.jpg" alt="標題111" title="標題111" />
-                                                </div>
-                                                <div class="carousel-item" data-bs-interval="2000">
-                                                    <img src="/image/demo/carousel_2.jpg" alt="標題222" title="標題222" />
-                                                </div>
-                                                <div class="carousel-item" data-bs-interval="2000">
-                                                    <img src="/image/demo/carousel_3.jpg" alt="標題333" title="標題333" />
-                                                </div>
-                                            </div>
-                                            <button class="carousel-control-prev" type="button" data-bs-target="#u_module_entity-101" data-bs-slide="prev">
-                                                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                                                <span class="visually-hidden">Previous</span>
-                                            </button>
-                                            <button class="carousel-control-next" type="button" data-bs-target="#u_module_entity-101" data-bs-slide="next">
-                                                <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                                                <span class="visually-hidden">Next</span>
-                                            </button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div id="u_page_html_footer">
+                            <div id="u_pnl_view_body"></div>
+                            <div id="u_pnl_view_footer">
                                 <h1 class="text-center bg-warning">Page Footer</h1>
                             </div>
                         </div>
@@ -74,20 +59,18 @@
         </div>
         <div id="u_page_rt">
             <div id="u_page_rt_wrap">
-                <div id="u_page_view_modules">
+                <div id="u_pnl_modules">
                     <div class="u_pnl_header">可選模組</div>
-                    <div class="u_pnl_main"></div>
+                    <div class="u_pnl_body"></div>
                 </div>
-                <div id="u_page_view_styles" style="display:none;">
+                <div id="u_pnl_styles" style="display:none;">
                     <div class="u_pnl_header">
                         <span>可選版型</span>
-                        <button class="btn btn-danger btn-sm u_btn_backtomodules">返回</button>
+                        <button class="btn btn-danger btn-sm u_btn_show_modules">返回</button>
                     </div>
-                    <div class="u_pnl_main">
-                    </div>
+                    <div class="u_pnl_body"></div>
                 </div>
-                <div id="u_page_view_form" style="display:none;">
-                </div>
+                <div id="u_pnl_moduleform" style="display:none;"></div>
             </div>
         </div>
     </div>
@@ -97,7 +80,7 @@
     <script src="~/lib/sortable/sortable.min.js"></script>
     <script src="~/js/page_editor.js" asp-append-version="true"></script>
     <script>
-        Sortable.create(document.getElementById('u_page_html_main'),{
+        Sortable.create(document.getElementById('u_pnl_view_body'), {
             
         });
     </script>

@@ -1,11 +1,25 @@
 ﻿$(function () {
 
+    var htmlHelper = {
+        buildeMarginClassName() {
+
+        },
+
+        builderTextClassName() {
+
+        },
+
+        builderButtonClassName() {
+
+        }
+    };
+
     var modules = {
 
         'Carousel': {
             label: '輪播圖',
             styles: [
-                { value: 'A', label: '一般輪播' },
+                { value: 'A', label: '一般輪播', sketch: '<div>效果图</div>' },
                 { value: 'B', label: '大圖輪播' }
             ],
 
@@ -21,8 +35,11 @@
 
             defData: {
                 container: {
-                    marginBottom: 0,
-                    borderRadius: [0, 0, 0, 0]
+                    margin: 0,
+                    padding: 0,
+                    rounded: '',
+                    bgColor: 'default',
+                    themeColor: 'default'
                 },
                 form: {
                     interval: 2000,
@@ -100,10 +117,10 @@
     }
 
     var tmpModuleId = 100;
-    var $htmlMain = $('#u_page_html_main');
-    var $viewModules = $('#u_page_view_modules');
-    var $viewStyles = $('#u_page_view_styles');
-    var $voewForm = $('#u_page_view_form');
+    var $view = $('#u_pnl_view_body');
+    var $pnlModules = $('#u_pnl_modules');
+    var $pnlStyles = $('#u_pnl_styles');
+    var $pnlModuleForm = $('#u_pnl_moduleform');
 
     function initEditor() {
         initView();
@@ -127,17 +144,17 @@
             stylesHtml += '</div>';
         });
 
-        $viewModules.find('.u_pnl_main').html(modulesHtml);
-        $viewStyles.find('.u_pnl_main').html(stylesHtml);
+        $pnlModules.find('.u_pnl_body').html(modulesHtml);
+        $pnlStyles.find('.u_pnl_body').html(stylesHtml);
 
-        $viewModules.on('click', '.u_module_item', selectModule);
-        $viewStyles.on('click', '.u_style_item', selectModuleStyle);
-        $viewStyles.on('click', '.u_btn_backtomodules', function () {
-            $viewModules.show();
-            $viewStyles.hide();
+        $pnlModules.on('click', '.u_module_item', selectModule);
+        $pnlStyles.on('click', '.u_style_item', selectModuleStyle);
+        $pnlStyles.on('click', '.u_btn_show_modules', function () {
+            $pnlModules.show();
+            $pnlStyles.hide();
         });
 
-        $htmlMain
+        $view
             .on('click', '.u_btn_moveup_module', moveUpModule)
             .on('click', '.u_btn_movedown_module', moveDownModule)
             .on('click', '.u_btn_del_module', delModule)
@@ -160,13 +177,13 @@
     // 選擇模組
     function selectModule() {
         var key = $(this).data('value');
-        var $curr = $viewStyles.find('.u_module_grp[data-value=' + key + ']');
+        var $curr = $pnlStyles.find('.u_module_grp[data-value=' + key + ']');
 
         $curr.show();
         $curr.siblings().hide();
 
-        $viewModules.hide();
-        $viewStyles.show();
+        $pnlModules.hide();
+        $pnlStyles.show();
     }
 
     // 選擇模組版型
@@ -199,7 +216,7 @@
 
         var $newModule = $(moduleWrapHtml);
         $newModule.data('form-data', moduleData);
-        $htmlMain.append($newModule);
+        $view.append($newModule);
     }
 
     // 向上移動模組
@@ -227,15 +244,18 @@
         var $this = $(this);
         var $moduleWrap = $this.closest('.u_module_wrap');
         var moduleId = $moduleWrap.data('id');
+        var moduleValue = $moduleWrap.data('module');
+        var styleValue = $moduleWrap.data('style');
+        var moduleFormData = $moduleWrap.data('form-data');
 
-        $htmlMain.find('.u_module_wrap--active').removeClass('u_module_wrap--active');
+        $view.find('.u_module_wrap--active').removeClass('u_module_wrap--active');
         $moduleWrap.addClass('u_module_wrap--active');
 
-        console.log($moduleWrap.data('form-data'));
+        console.log(moduleValue, styleValue, moduleFormData);
     }
 
     // 顯示模組表單
-    function showModuleForm(moduleValue, moduleData) {
+    function showModuleForm(moduleValue, moduleFormData) {
 
     }
 
