@@ -6,13 +6,39 @@
     var $pnlModuleStyles = $('#u_pnl_modulestyles');
     var $pnlModuleForm = $('#u_pnl_moduleform');
 
+    var $modalDelModule = $('#u_modal_delmodule');
+    var modalForDelModule = new bootstrap.Modal($modalDelModule[0]);
+
     const ModuleFieldTypes = {
         Text: 'text',
         TextArea: 'textarea',
         CheckBox: 'checkbox',
         Button: 'button',
         Image: 'image',
-        ImageArray: 'imageArray'
+        ImageArray: 'imageArray',
+        Color: 'color'
+    };
+
+    const ModuleColors = [
+        { value: 'primary', label: '藍' },
+        { value: 'secondary', label: '灰' },
+        { value: 'success', label: '綠' },
+        { value: 'danger', label: '紅' },
+        { value: 'warning', label: '黃' },
+        { value: 'info', label: '青' },
+        { value: 'light', label: '亮' },
+        { value: 'dark', label: '黑' },
+        { value: 'none', label: '(無)' }
+    ];
+
+    // HTML助手
+    var htmlHelper = {
+        formatTextAreaText(text) {
+            var html = text || '';
+            html = html.replaceAll('<', '&lt;').replaceAll('>', '&gt;');
+            html = html.split('\n').map(function (x) { return '<p>' + x + '</p>' }).join('');
+            return html;
+        }
     };
 
     // 所有模組
@@ -87,6 +113,7 @@
                 { value: 'A2', label: '左文右圖', cover: '' }
             ],
             contentFields: [
+                { name: 'padding', type: 'checkbox', label: '內部間距' },
                 { name: 'pic', type: 'image', label: '圖檔' },
                 { name: 'title', type: 'text', label: '標題' },
                 { name: 'desc', type: 'textarea', label: '描述' },
@@ -94,29 +121,31 @@
             ],
             defaultData: {
                 container: {
+                    themeColor: 'light',
+                    bgColor: 'none',
                     margin: true,
                     padding: false,
-                    rounded: [1, 1, 1, 1],
-                    bgColor: 'none',
-                    themeColor: 'light'
+                    rounded: [1, 1, 1, 1]
                 },
                 content: {
+                    padding: false,
                     pic: '/image/demo/PicWithTxt_pic.jpg',
                     title: '標題內容...',
                     desc: '描述內容...',
-                    btn: { txt: '查看詳情', link: '' },
-                    padding: false
+                    btn: { show: true, txt: '查看詳情', link: '' }
                 }
             },
             buildViewHtml(id, template, data) {
                 var containerData = data.container;
                 var contentData = data.content;
                 var isLPRT = template == 'A1';
-                var isLight = containerData.themeColor == 'light';
+                var isLightTheme = containerData.themeColor == 'light';
                 var isPadding = contentData.padding;
 
+                var formatedDesc = htmlHelper.formatTextAreaText(contentData.desc);
+
                 var html = '';
-                html += '<div class="u_module u_module-PicWithTxt u_module-PicWithTxt-' + template + (isPadding ? ' u_module-PicWithTxt-' + template + '--padding' : '') + (containerData.margin ? ' mb-3' : ' mb-0') + '">';
+                html += '<div class="u_module text-bg-' + containerData.bgColor + ' u_module-PicWithTxt u_module-PicWithTxt-' + template + (isPadding ? ' u_module-PicWithTxt-' + template + '--padding' : '') + (containerData.margin ? ' mb-3' : ' mb-0') + (containerData.padding ? ' py-3' : '') + '">';
                 html += '  <div class="container">';
 
                 html += '    <div class="row g-0 rounded-3 text-bg-' + containerData.themeColor + '">';
@@ -130,16 +159,24 @@
                     html += '      <div class="col-12 col-lg-6">';
                     html += '        <div class="u_module-PicWithTxt_txt">';
                     html += '          <div class="u_module-PicWithTxt_txt_title fs-3 mb-3">' + contentData.title + '</div>';
-                    html += '          <div class="u_module-PicWithTxt_txt_desc fs-5 mb-2">' + contentData.desc + '</div>';
-                    html += '          <div class="u_module-PicWithTxt_txt_act text-end"><a href="/" class="btn ' + (isLight ? 'btn-primary' : 'btn-outline-light') + '">' + contentData.btn.txt + '</a></div>';
+                    html += '          <div class="u_module-PicWithTxt_txt_desc fs-5">' + formatedDesc + '</div>';
+
+                    if (contentData.btn.show) {
+                        html += '      <div class="u_module-PicWithTxt_txt_act text-end"><a href="/" class="btn ' + (isLightTheme ? 'btn-primary' : 'btn-light') + '">' + contentData.btn.txt + '</a></div>';
+                    }
+
                     html += '        </div>';
                     html += '      </div>';
                 } else {
                     html += '      <div class="col-12 col-lg-6 u_module-PicWithTxt_txt--source">';
                     html += '        <div class="u_module-PicWithTxt_txt">';
                     html += '          <div class="u_module-PicWithTxt_txt_title fs-3 mb-3">' + contentData.title + '</div>';
-                    html += '          <div class="u_module-PicWithTxt_txt_desc fs-5 mb-2">' + contentData.desc + '</div>';
-                    html += '          <div class="u_module-PicWithTxt_txt_act text-start"><a href="/" class="btn ' + (isLight ? 'btn-primary' : 'btn-outline-light') + '">' + contentData.btn.txt + '</a></div>';
+                    html += '          <div class="u_module-PicWithTxt_txt_desc fs-5">' + formatedDesc + '</div>';
+
+                    if (contentData.btn.show) {
+                        html += '      <div class="u_module-PicWithTxt_txt_act text-start"><a href="/" class="btn ' + (isLightTheme ? 'btn-primary' : 'btn-light') + '">' + contentData.btn.txt + '</a></div>';
+                    }
+
                     html += '        </div>';
                     html += '      </div>';
                     html += '      <div  class="col-12 col-lg-6 ">';
@@ -150,8 +187,12 @@
                     html += '      <div class="col-12 col-lg-6 u_module-PicWithTxt_txt--clone">';
                     html += '        <div class="u_module-PicWithTxt_txt">';
                     html += '          <div class="u_module-PicWithTxt_txt_title fs-3 mb-3">' + contentData.title + '</div>';
-                    html += '          <div class="u_module-PicWithTxt_txt_desc fs-5 mb-2">' + contentData.desc + '</div>';
-                    html += '          <div class="u_module-PicWithTxt_txt_act text-end"><a href="/" class="btn ' + (isLight ? 'btn-primary' : 'btn-outline-light') + '">' + contentData.btn.txt + '</a></div>';
+                    html += '          <div class="u_module-PicWithTxt_txt_desc fs-5">' + formatedDesc + '</div>';
+
+                    if (contentData.btn.show) {
+                        html += '      <div class="u_module-PicWithTxt_txt_act text-end"><a href="/" class="btn ' + (isLightTheme ? 'btn-primary' : 'btn-light') + '">' + contentData.btn.txt + '</a></div>';
+                    }
+
                     html += '        </div>';
                 }
 
@@ -164,8 +205,8 @@
         }
     }
 
-    // HTML助手
-    var htmlHelper = {
+    // 模組助手
+    var moduleHelper = {
         buildeMarginClassName() {
 
         },
@@ -202,7 +243,17 @@
                     break;
 
                 case ModuleFieldTypes.Button:
+                    var btnId = id + '_btn';
                     html += '<div class="row mb-3">\
+                                <div class="col-3">顯示</div>\
+                                <div class="col-9">\
+                                    <div class="form-check form-switch">\
+                                        <input class="form-check-input" type="checkbox" role="switch" data-name="show" id="' + btnId + '"' + (field.value.show ? ' checked' : '') + ' />\
+                                        <label class="form-check-label" for="'+ btnId + '"></label>\
+                                    </div>\
+                                </div>\
+                             </div>\
+                             <div class="row mb-3">\
                                <div class="col-3">文字</div>\
                                <div class="col-9"><input type="text" class="form-control" data-name="txt" value="' + field.value.txt + '" /></div>\
                              </div>\
@@ -216,6 +267,20 @@
                     html += '<div><img src="' + field.value + '" class="img-thumbnail" /></div>';
                     break;
 
+                case ModuleFieldTypes.Color:
+                    html += '<div class="d-flex flex-wrap align-items-center u_form_color">';
+                    $.each(ModuleColors, function (index, item) {
+                        html += '<div class="u_form_color_item' + (item.value == field.value ? ' active' : '') + '" data-value="' + item.value + '">';
+                        if (item.value == 'none') {
+                            html += '  <div class="text-bg-light text-center" title="' + item.label + '" style="font-size:12px;">無</div>';
+                        } else {
+                            html += '  <div class="text-bg-' + item.value + '" title="' + item.label + '"></div>';
+                        }
+                        html += '</div>';
+                    });
+                    html += '</div>';
+                    break;
+
                 default:
                     html += '<input type="text" class="form-control" value="' + field.value + '" />';
                     break;
@@ -223,11 +288,24 @@
 
             html += '  </div>';
             html += '</div>';
+            html += '<hr />';
             return html;
         },
 
         builderModuleContainerFormHtml(moduleId, containerData) {
             var html = '';
+            html += this.builderModuleFieldFormHtml(moduleId, {
+                name: 'themeColor',
+                label: '主題顏色',
+                type: 'color',
+                value: containerData.themeColor
+            });
+            html += this.builderModuleFieldFormHtml(moduleId, {
+                name: 'bgColor',
+                label: '背景顏色',
+                type: 'color',
+                value: containerData.bgColor
+            });
             html += this.builderModuleFieldFormHtml(moduleId, {
                 name: 'margin',
                 label: '外部間距',
@@ -246,31 +324,37 @@
         builderModuleFormHtml(moduleId, moduleData, moduleContentFields) {
             var that = this;
             var html = '';
-            html += '<div class="u_module_form">';
-            html += '  <div class="u_module_form_grp" id="u_module_form_grp-container">';
-            html += '    <div class="u_module_form_grp_header">';
-            html += '      <h3>容器</h3>';
-            html += '    </div>';
-            html += '    <div class="u_module_form_grp_body">';
+
+            html += '<div class="accordion p-1" id="u_modal_form">';
+            html += '  <div class="accordion-item">';
+            html += '    <h2 class="accordion-header">';
+            html += '      <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#u_module_form-container">容器</button>';
+            html += '    </h2>';
+            html += '    <div id="u_module_form-container" class="ccordion-collapse collapse" data-bs-parent="#u_modal_form">';
+            html += '      <div class="accordion-body p-2">';
             html += that.builderModuleContainerFormHtml(moduleId, moduleData.container);
+            html += '      </div>';
             html += '    </div>';
             html += '  </div>';
-            html += '  <div class="u_module_form_grp" id="u_module_form_grp-content">';
-            html += '    <div class="u_module_form_grp_header">';
-            html += '      <h3>內容</h3>';
-            html += '    </div>';
-            html += '    <div class="u_module_form_grp_body">';
+            html += '  <div class="accordion-item">';
+            html += '    <h2 class="accordion-header">';
+            html += '      <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#u_module_form-content">內容</button>';
+            html += '    </h2>';
+            html += '    <div id="u_module_form-content" class="ccordion-collapse collapse show" data-bs-parent="#u_modal_form">';
+            html += '      <div class="accordion-body p-2">';
             $.each(moduleContentFields, function (index, field) {
                 field.value = moduleData.content[field.name];
                 html += that.builderModuleFieldFormHtml(moduleId, field);
             });
+            html += '      </div>';
             html += '    </div>';
             html += '  </div>';
             html += '</div>';
+
             return html;
         },
 
-        getModuleFieldValue($field, fieldType) {
+        getFormFieldValue($field, fieldType) {
             switch (fieldType) {
                 case ModuleFieldTypes.Text:
                     return $field.find('input[type=text]').val().trim();
@@ -279,10 +363,11 @@
                     return $field.find('textarea').val().trim();
 
                 case ModuleFieldTypes.CheckBox:
-                    return false;
+                    return $field.find('input[type=checkbox]').prop('checked');
 
                 case ModuleFieldTypes.Button:
                     return {
+                        show: $field.find('input[data-name=show]').prop('checked'),
                         txt: $field.find('input[data-name=txt]').val().trim(),
                         link: $field.find('input[data-name=link]').val().trim()
                     };
@@ -290,11 +375,16 @@
                 case ModuleFieldTypes.Image:
                     return $field.find('img').attr('src');
 
+                case ModuleFieldTypes.Color:
+                    return $field.find('.active').data('value');
+
                 default:
                     return '';
             }
         }
     };
+
+    
 
     // 初始化編輯器
     function initEditor() {
@@ -304,7 +394,13 @@
 
     // 初始化頁面
     function initPages() {
+        $view
+            .on('click', '.u_btn_moveup_module', moveUpModule)
+            .on('click', '.u_btn_movedown_module', moveDownModule)
+            .on('click', '.u_btn_del_module', confirmDelModule)
+            .on('click', '.u_btn_edit_module', editModule);
 
+        $modalDelModule.on('click', '.u_btn_confirm', delModule);
     }
 
     // 初始化模組
@@ -330,16 +426,15 @@
         $pnlModuleStyles.find('.u_pnl_body').html(moduleStylesHtml);
 
         $pnlModules.on('click', '.u_module_item', selectModule);
-        $pnlModuleStyles.on('click', '.u_style_item', selectModuleStyle);
-        $pnlModuleStyles.on('click', '.u_btn_show_modules', showModules);
-        $pnlModuleForm.on('click', '.u_btn_show_modules', showModules);
-        $pnlModuleForm.on('click', '.u_btn_save_module', saveModule);
 
-        $view
-            .on('click', '.u_btn_moveup_module', moveUpModule)
-            .on('click', '.u_btn_movedown_module', moveDownModule)
-            .on('click', '.u_btn_del_module', delModule)
-            .on('click', '.u_btn_edit_module', editModule);
+        $pnlModuleStyles
+            .on('click', '.u_style_item', selectModuleStyle)
+            .on('click', '.u_btn_show_modules', showModules);
+
+        $pnlModuleForm
+            .on('click', '.u_btn_show_modules', showModules)
+            .on('click', '.u_btn_save_module', saveModule)
+            .on('click', '.u_form_color_item ', selectFormColor);
     }
 
     // 新增頁面
@@ -412,15 +507,14 @@
                               </div>';
         var moduleWrapHtml = '<div class="u_module_wrap" data-module="' + moduleValue + '" data-style="' + styleValue + '" data-id="' + moduleId + '">' + moduleMaskHtml + moduleInnerHtml + '</div>';
 
-        var $newModule = $(moduleWrapHtml);
-        $newModule.data('data', moduleData);
-        $newModule.data('props', {
+        var $newModuleWrap = $(moduleWrapHtml);
+        $newModuleWrap.data('props', {
             id: moduleId,
             name: moduleValue,
             style: styleValue,
             data: moduleData
         });
-        $view.append($newModule);
+        $view.append($newModuleWrap);
 
         $('.u_module_wrap[data-id="' + moduleId + '"] .u_btn_edit_module').trigger('click');
     }
@@ -437,11 +531,22 @@
         $moduleWrap.insertAfter($moduleWrap.next());
     }
 
+    // 模組刪除提示
+    function confirmDelModule() {
+        var moduleId = $(this).closest('.u_module_wrap').data('id');
+        $modalDelModule.data('moduleId', moduleId);
+        modalForDelModule.show();
+    }
+
     // 刪除模組
     function delModule() {
-        if (confirm('確定要刪除該模組内容嗎')) {
-            var $this = $(this);
-            $this.closest('.u_module_wrap').remove();
+        var moduleId = $modalDelModule.data('moduleId');
+        $('.u_module_wrap[data-id=' + moduleId + ']').remove();
+        modalForDelModule.hide();
+
+        var currFormModuleId = $pnlModuleForm.data('moduleId');
+        if (currFormModuleId == moduleId) {
+            showModules();
         }
     }
 
@@ -449,19 +554,17 @@
     function editModule() {
         var $this = $(this);
         var $moduleWrap = $this.closest('.u_module_wrap');
-        var moduleId = $moduleWrap.data('id');
-        var moduleName = $moduleWrap.data('module');
-        var moduleData = $moduleWrap.data('data');
-
         var moduleProps = $moduleWrap.data('props');
 
         $view.find('.u_module_wrap--active').removeClass('u_module_wrap--active');
         $moduleWrap.addClass('u_module_wrap--active');
 
-        $pnlModuleForm.data('moduleId', moduleId);
-        $pnlModuleForm.data('moduleName', moduleName);
+        var moduleId = moduleProps.id;
+        var moduleName = moduleProps.name;
+        var moduleData = moduleProps.data;
 
-        var moduleFormHtml = htmlHelper.builderModuleFormHtml(moduleId, moduleData, modules[moduleName].contentFields);
+        var moduleFormHtml = moduleHelper.builderModuleFormHtml(moduleId, moduleData, modules[moduleName].contentFields);
+        $pnlModuleForm.data('moduleId', moduleId);
         $pnlModuleForm.find('.u_pnl_body').html(moduleFormHtml);
         $pnlModuleForm.show();
         $pnlModuleStyles.hide();
@@ -471,34 +574,43 @@
     // 保存模組
     function saveModule() {
         var moduleId = $pnlModuleForm.data('moduleId');
-        var moduleName = $pnlModuleForm.data('moduleName');
+        var $moduleWrap = $('.u_module_wrap[data-id=' + moduleId + ']');
+        var moduleProps = $moduleWrap.data('props');
 
-        var $containerFiels = $('#u_module_form_grp-container').find('.u_form_field');
-        var $contentFields = $('#u_module_form_grp-content').find('.u_form_field');
+        var $containerFiels = $('#u_module_form-container').find('.u_form_field');
+        var $contentFields = $('#u_module_form-content').find('.u_form_field');
 
         var moduleData = {
             container: {},
             content: {}
         };
 
-        moduleData.container = {
-            margin: true,
-            padding: false,
-            rounded: [1, 1, 1, 1],
-            bgColor: 'none',
-            themeColor: 'light'
-        };
+        $.each($containerFiels, function () {
+            var $this = $(this);
+            var fieldName = $this.data('name');
+            var fieldType = $this.data('type');
+            moduleData.container[fieldName] = moduleHelper.getFormFieldValue($this, fieldType);
+        });
 
         $.each($contentFields, function () {
             var $this = $(this);
             var fieldName = $this.data('name');
             var fieldType = $this.data('type');
-            moduleData.content[fieldName] = htmlHelper.getModuleFieldValue($this, fieldType);
-
+            moduleData.content[fieldName] = moduleHelper.getFormFieldValue($this, fieldType);
         });
 
+        moduleProps.data = moduleData;
+        $moduleWrap.data('props', moduleProps);
 
-        
+        console.log(moduleProps);
+
+        var moduleViewHtml = modules[moduleProps.name].buildViewHtml(moduleId, moduleProps.style, moduleData);
+        $moduleWrap.find('.u_module_inner').html(moduleViewHtml);
+    }
+
+    // 選擇顏色
+    function selectFormColor() {
+        $(this).addClass('active').siblings('.active').removeClass('active');
     }
 
     // 初始化

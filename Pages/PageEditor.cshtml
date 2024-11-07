@@ -12,9 +12,9 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/bootstrap_ext.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/css/page_editor.css" asp-append-version="true" />
-    <link href="~/css/module.css" rel="stylesheet" />
-    <link href="~/css/module_monitor.css" rel="stylesheet" />
+    <link rel="stylesheet" href="~/css/module.css" asp-append-version="true" />
     <script src="~/lib/tinymce/tinymce.min.js"></script>
 </head>
 <body>
@@ -60,25 +60,50 @@
         <div id="u_page_rt">
             <div id="u_page_rt_wrap">
                 <div id="u_pnl_modules">
-                    <div class="u_pnl_header">可選模組</div>
-                    <div class="u_pnl_body"></div>
+                    <div class="d-flex flex-column" style="height:100vh;">
+                        <div class="u_pnl_header text-bg-danger p-3 fs-5">可選模組</div>
+                        <div class="u_pnl_body flex-fill p-2" style="overflow-y:auto;"></div>
+                    </div>
                 </div>
                 <div id="u_pnl_modulestyles" style="display:none;">
-                    <div class="u_pnl_header">
-                        <span>可選版型</span>
-                        <button class="btn btn-danger btn-sm u_btn_show_modules">選擇模組</button>
+                    <div class="d-flex flex-column" style="height:100vh;">
+                        <div class="u_pnl_header text-bg-danger p-3 fs-5 d-flex justify-content-between">
+                            <span>可選版型</span>
+                            <button class="btn btn-light btn-sm u_btn_show_modules">返回</button>
+                        </div>
+                        <div class="u_pnl_body flex-fill p-2" style="overflow-y:auto;"></div>
                     </div>
-                    <div class="u_pnl_body"></div>
                 </div>
                 <div id="u_pnl_moduleform" style="display:none;">
-                    <div class="u_pnl_header">
-                        <span>模組編輯</span>
-                        <button class="btn btn-danger btn-sm u_btn_show_modules">新增模組</button>
+                    <div class="d-flex flex-column" style="height:100vh;">
+                        <div class="u_pnl_header text-bg-danger p-3 fs-5 d-flex justify-content-between">
+                            <span>模組編輯</span>
+                            <button class="btn btn-light btn-sm u_btn_show_modules">返回</button>
+                        </div>
+                        <div class="u_pnl_body flex-fill" style="overflow-y:auto;"></div>
+                        <div class="u_pnl_footer p-3 text-center" style="background-color:#fff; border-top:1px solid #ddd;">
+                            <div class="d-grid">
+                                <button type="button" class="btn btn-primary u_btn_save_module">保存</button>
+                            </div>
+                        </div>
                     </div>
-                    <div class="u_pnl_body"></div>
-                    <div class="u_pnl_footer">
-                        <button type="button" class="btn btn-primary u_btn_save_module">保存</button>
-                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="u_modal_delmodule" class="modal fade">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">操作提示</h5>
+                </div>
+                <div class="modal-body">
+                    <p>確定要刪除該模組嗎？</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">取消</button>
+                    <button type="button" class="btn btn-danger u_btn_confirm">確定</button>
                 </div>
             </div>
         </div>

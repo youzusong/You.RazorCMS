@@ -58,6 +58,10 @@
     overflow: hidden;
 }
 
+    .u_module-PicWithTxt_txt_desc p:last-child {
+        margin-bottom: 0;
+    }
+
 
 @media(max-width: 992px) {
     .u_module-PicWithTxt-A1--padding .u_module-PicWithTxt_pic {
