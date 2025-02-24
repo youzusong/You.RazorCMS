@@ -127,8 +127,9 @@ html{
         position: absolute;
         right: 0px;
         top: 0px;
-        background-color:#fff;
-        padding:10px;
+        background-color: #fff;
+        padding: 10px;
+        box-shadow: -2px 2px 5px #666;
     }
 
 
@@ -172,7 +173,6 @@ html{
     }
 
     .u_form_color_item:last-child {
-        margin-left: 0;
     }
 
     .u_form_color_item:hover {

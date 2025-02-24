@@ -34,34 +34,31 @@
 }
 /***** 輪播圖 END *****/
 
-/***** 圖文並列 BEGIN *****/
+/***** 圖文組合 BEGIN *****/
 .u_module-PicWithTxt {
 }
 
-.u_module-PicWithTxt_pic {
-    overflow: hidden;
+.u_module-PicWithTxt_pic{
+    height:100%;
 }
 
-
-.u_module-PicWithTxt_pic_img {
-    height: 100%;
-}
+    .u_module-PicWithTxt_pic img {
+        height: 100%;
+        object-fit: cover;
+        object-position: center;
+    }
 
 .u_module-PicWithTxt_txt {
     display: flex;
     flex-direction: column;
     padding: 1rem;
+    height: 100%;
 }
 
 .u_module-PicWithTxt_txt_desc {
     flex: 1;
     overflow: hidden;
 }
-
-    .u_module-PicWithTxt_txt_desc p:last-child {
-        margin-bottom: 0;
-    }
-
 
 @media(max-width: 992px) {
     .u_module-PicWithTxt-A1--padding .u_module-PicWithTxt_pic {
@@ -80,8 +77,6 @@
     .u_module-PicWithTxt_txt--clone {
         display: block;
     }
-
-    
 }
 
 @media(min-width: 992px) {
@@ -93,12 +88,6 @@
         padding: 1rem 1rem 1rem 0;
     }
 
-
-    .u_module-PicWithTxt_pic,
-    .u_module-PicWithTxt_txt {
-        height: 234px;
-    }
-
     .u_module-PicWithTxt_txt--source {
         display: block;
     }
@@ -108,17 +97,4 @@
     }
 }
 
-@media (min-width:1200px) {
-    .u_module-PicWithTxt_pic,
-    .u_module-PicWithTxt_txt {
-        height: 279px;
-    }
-}
-
-@media (min-width:1400px) {
-    .u_module-PicWithTxt_pic,
-    .u_module-PicWithTxt_txt {
-        height: 324px;
-    }
-}
-/***** 圖文並列 END *****/
+/***** 圖文組合 END *****/

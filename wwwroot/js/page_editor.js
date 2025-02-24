@@ -1,6 +1,6 @@
 ﻿$(function () {
 
-    var tmpModuleId = 100;
+    var tmpModuleId = 1;
     var $view = $('#u_pnl_view_body');
     var $pnlModules = $('#u_pnl_modules');
     var $pnlModuleStyles = $('#u_pnl_modulestyles');
@@ -12,11 +12,13 @@
     const ModuleFieldTypes = {
         Text: 'text',
         TextArea: 'textarea',
+        Number: 'number',
         CheckBox: 'checkbox',
         Button: 'button',
         Image: 'image',
         ImageArray: 'imageArray',
-        Color: 'color'
+        Color: 'color',
+        Rounded: 'rounded'
     };
 
     const ModuleColors = [
@@ -26,8 +28,8 @@
         { value: 'danger', label: '紅' },
         { value: 'warning', label: '黃' },
         { value: 'info', label: '青' },
-        { value: 'light', label: '亮' },
         { value: 'dark', label: '黑' },
+        { value: 'light', label: '亮' },
         { value: 'none', label: '(無)' }
     ];
 
@@ -44,6 +46,35 @@
     // 所有模組
     var modules = {
 
+        Text: {
+            label: '一般文字',
+            templates: [
+                { value: 'A', label: 'A', cover: '' }
+            ],
+            contentFields: [
+                { name: 'title', type: 'text', label: '標題' },
+                { name: 'subtitle', type: 'text', label: '副標題' }
+            ],
+            defaultData: {
+                container: {
+                    margin: true,
+                    padding: false,
+                    rounded: [0, 0, 0, 0],
+                    bgColor: 'none',
+                    themeColor: 'light'
+                },
+                content: {
+                    title: '自定標題內容',
+                    subtitle: '自定副標題內容'
+                }
+            },
+            buildViewHtml(id, template, data) {
+                var html = '';
+
+                return html;
+            }
+        },
+
         Carousel: {
             label: '輪播圖',
             templates: [
@@ -51,8 +82,8 @@
                 { value: 'B', label: '大圖輪播', cover: '' }
             ],
             contentFields: [
-                { name: 'items', type: 'imageArray', label: '輪播圖檔' },
-                { name: 'interval', type: 'number', label: '輪播間隔' }
+                { name: 'interval', type: 'number', label: '輪播間隔（毫秒）' },
+                { name: 'items', type: 'imageArray', label: '輪播圖檔' }
             ],
             defaultData: {
                 container: {
@@ -78,7 +109,7 @@
                 var entityId = 'u_module_entity-' + id;
                 var html = '';
                 html += '<div class="u_module u_module-Carousel u_module-Carousel-' + template + (containerData.margin ? ' mb-3' : ' mb-0') + '">';
-                html += '  <div class="container">';
+                html += '  <div class="container-flud">';
 
                 html += '    <div id="' + entityId + '" class="carousel slide" data-bs-ride="carousel">';
                 html += '      <div class="carousel-inner">';
@@ -102,12 +133,18 @@
 
                 html += '  </div>';
                 html += '</div>';
+
                 return html;
+            },
+
+            inited(id, template, data) {
+                var entityId = 'u_module_entity-' + id;
+                new bootstrap.Carousel(document.getElementById(entityId));
             }
         },
 
         PicWithTxt: {
-            label: '圖文並列',
+            label: '圖文組合',
             templates: [
                 { value: 'A1', label: '左圖右文', cover: '' },
                 { value: 'A2', label: '左文右圖', cover: '' }
@@ -130,15 +167,15 @@
                 content: {
                     padding: false,
                     pic: '/image/demo/PicWithTxt_pic.jpg',
-                    title: '標題內容...',
-                    desc: '描述內容...',
+                    title: '自定標題內容',
+                    desc: '自定描述內容',
                     btn: { show: true, txt: '查看詳情', link: '' }
                 }
             },
             buildViewHtml(id, template, data) {
                 var containerData = data.container;
                 var contentData = data.content;
-                var isLPRT = template == 'A1';
+                var isLPRT = template == 'A1';  // 左圖右文
                 var isLightTheme = containerData.themeColor == 'light';
                 var isPadding = contentData.padding;
 
@@ -148,12 +185,12 @@
                 html += '<div class="u_module text-bg-' + containerData.bgColor + ' u_module-PicWithTxt u_module-PicWithTxt-' + template + (isPadding ? ' u_module-PicWithTxt-' + template + '--padding' : '') + (containerData.margin ? ' mb-3' : ' mb-0') + (containerData.padding ? ' py-3' : '') + '">';
                 html += '  <div class="container">';
 
-                html += '    <div class="row g-0 rounded-3 text-bg-' + containerData.themeColor + '">';
+                html += '    <div class="row g-0 rounded-4 text-bg-' + containerData.themeColor + '">';
 
                 if (isLPRT) {
                     html += '      <div  class="col-12 col-lg-6">';
                     html += '        <div class="u_module-PicWithTxt_pic">';
-                    html += '          <img class="u_module-PicWithTxt_pic_img' + (isPadding ? ' rounded-3' : '') + '" src="' + contentData.pic + '" />';
+                    html += '          <img class="u_module-PicWithTxt_pic_img' + (isPadding ? ' rounded-4' : '') + '" src="' + contentData.pic + '" />';
                     html += '        </div>';
                     html += '      </div>';
                     html += '      <div class="col-12 col-lg-6">';
@@ -181,7 +218,7 @@
                     html += '      </div>';
                     html += '      <div  class="col-12 col-lg-6 ">';
                     html += '        <div class="u_module-PicWithTxt_pic">';
-                    html += '          <img class="u_module-PicWithTxt_pic_img' + (isPadding ? ' rounded-3' : '') + '" src="' + contentData.pic + '" />';
+                    html += '          <img class="u_module-PicWithTxt_pic_img' + (isPadding ? ' rounded-4' : '') + '" src="' + contentData.pic + '" />';
                     html += '        </div>';
                     html += '      </div>';
                     html += '      <div class="col-12 col-lg-6 u_module-PicWithTxt_txt--clone">';
@@ -232,7 +269,11 @@
                     break;
 
                 case ModuleFieldTypes.TextArea:
-                    html += '<textarea  class="form-control" rows="3">' + field.value + '</textarea>';
+                    html += '<textarea class="form-control" rows="3">' + field.value + '</textarea>';
+                    break;
+
+                case ModuleFieldTypes.Number:
+                    html += '<input type="number" class="form-control" value="' + field.value + '" />';
                     break;
 
                 case ModuleFieldTypes.CheckBox:
@@ -281,6 +322,23 @@
                     html += '</div>';
                     break;
 
+                case ModuleFieldTypes.Rounded:
+                    html += '<div>';
+                    $.each(['左上', '右上', '左下', '右下'], function (index, item) {
+                        var chkId = id + '_chk' + index
+                        var chkVal = 2 ** index;
+                        html += '<div class="form-check form-check-inline">\
+                                   <input class="form-check-input" type="checkbox" id="'+ chkId + '" value="' + chkVal + '" />\
+                                   <label class="form-check-label" for="'+ chkId + '">' + item + '</label>\
+                                 </div>';
+
+                        if (index == 1) {
+                            html += '<div></div>';
+                        }
+                    })
+                    html += '</div>'
+                    break;
+
                 default:
                     html += '<input type="text" class="form-control" value="' + field.value + '" />';
                     break;
@@ -317,6 +375,12 @@
                 label: '內部間距',
                 type: 'checkbox',
                 value: containerData.padding
+            });
+            html += this.builderModuleFieldFormHtml(moduleId, {
+                name: 'rounded',
+                label: '邊框圓角',
+                type: 'rounded',
+                value: containerData.rounded
             });
             return html;
         },
@@ -361,6 +425,9 @@
 
                 case ModuleFieldTypes.TextArea:
                     return $field.find('textarea').val().trim();
+
+                case ModuleFieldTypes.Number:
+                    return $field.find('input[type=number]').val();
 
                 case ModuleFieldTypes.CheckBox:
                     return $field.find('input[type=checkbox]').prop('checked');
@@ -486,8 +553,9 @@
         var styleValue = $this.data('value');
         var moduleValue = $this.closest('.u_module_grp').data('value');
 
-        tmpModuleId += 1;
         addModule(tmpModuleId, moduleValue, styleValue, modules[moduleValue].defaultData);
+
+        tmpModuleId += 1;
     }
 
     // 新增模組
@@ -516,7 +584,11 @@
         });
         $view.append($newModuleWrap);
 
-        $('.u_module_wrap[data-id="' + moduleId + '"] .u_btn_edit_module').trigger('click');
+        $newModuleWrap.find('.u_btn_edit_module').trigger('click');
+
+        if (modules[moduleValue].inited) {
+            modules[moduleValue].inited(moduleId, styleValue, moduleData);
+        }
     }
 
     // 向上移動模組
